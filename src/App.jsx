@@ -6,12 +6,13 @@ import {
   SingleProduct,
   Cart,
   About,
-  Register,
+  // Register,
   // Login,
   Checkout,
   Orders,
 } from './pages';
 import Login from './components/Login';
+import Register from './components/Register';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 
