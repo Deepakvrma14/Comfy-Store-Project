@@ -7,10 +7,11 @@ import {
   Cart,
   About,
   Register,
-  Login,
+  // Login,
   Checkout,
   Orders,
 } from './pages';
+import Login from './components/Login';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 
