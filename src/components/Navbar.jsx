@@ -1,8 +1,28 @@
 import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { NavLink } from 'react-router-dom';
-
+import NavLinks from './NavLinks';
+import { useEffect, useState } from 'react';
 const Navbar = () => {
+    const themes = {
+        autumn:'autumn',
+        dim:'dim',
+    };
+    const getThemeFromLocalStorage = ()=>{
+        console.log(`theme is ${localStorage.getItem('theme')}`);
+        return localStorage.getItem('theme')|| themes.autumn;
+    }
+
+    const  [theme, setTheme] = useState(getThemeFromLocalStorage());
+    const toggleTheme = ()=>{
+        const {autumn, dim} = themes;
+        const newTheme = theme ===autumn ?dim:autumn;
+        setTheme(newTheme);
+    }
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+      }, [theme]);
   return (
     <nav className='bg-base-200'>
       <div className='navbar align-element '>
@@ -12,7 +32,7 @@ const Navbar = () => {
             to='/'
             className='hidden lg:flex btn btn-primary text-3xl items-center '
           >
-            Comfy
+            C
           </NavLink>
           {/* DROPDOWN */}
           <div className='dropdown'>
@@ -23,13 +43,28 @@ const Navbar = () => {
               tabIndex={0}
               className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52'
             >
-              nav links
+             <NavLinks/>
             </ul>
+            
           </div>
         </div>
         <div className='navbar-center hidden lg:flex'>
-          <ul className='menu menu-horizontal '>nav links</ul>
+          <ul className='menu menu-horizontal '>
+            <NavLinks/>
+          </ul>
         </div>
+        <div className='navbar-end'>
+  <label className='swap swap-rotate '>
+    {/* this hidden checkbox controls the state */}
+    <input type='checkbox' onChange={toggleTheme} />
+
+    {/* sun icon */}
+    <BsSunFill className='swap-on h-4 w-4' />
+
+    {/* moon icon */}
+    <BsMoonFill className='swap-off h-4 w-4' />
+  </label>
+</div>;
         <div className='navbar-end'>
           <NavLink to='cart' className='btn btn-ghost btn-circle btn-md ml-4'>
             <div className='indicator'>
@@ -39,8 +74,10 @@ const Navbar = () => {
               </span>
             </div>
           </NavLink>
+          
         </div>
       </div>
+      
     </nav>
   );
 };
