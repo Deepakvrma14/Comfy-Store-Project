@@ -20,6 +20,6 @@ const About = () => {
         - Deepak
       </p>
     </>
-  );
+  )
 };
 export default About;
