@@ -13,9 +13,9 @@ import {
 } from './pages';
 import Login from './components/Login';
 import Register from './components/Register';
+import { ErrorElement } from './components';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-
-
+import { loader as landingLoader } from './pages/Landing';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -24,6 +24,8 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        errorElement:<ErrorElement/>,
+        loader:landingLoader,
         element: <Landing />,
       },
       {
