@@ -7,5 +7,7 @@ export {default as SectionTitle} from './SectionTitle';
 export {default as FeatureProducts} from './FeatureProducts';
 export {default as Filters} from './Filters';
 export {default as PaginationContainer} from './PaginationContainer';
-export {default as ProductsContainer} from './ProductsContainer'
+export {default as ProductsContainer} from './ProductsContainer';
+export {default as CartTotals} from './CartTotals' ;
+export {default as CartItemsList} from './CartItemsList';
 
