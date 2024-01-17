@@ -3,6 +3,7 @@ import {customFetch} from '../utils/index'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addItem } from '../features/cart/cartSlice'
+import { clearCart } from '../features/cart/cartSlice'
 export const loader  =async ({params}) =>{
     
     const response  = await customFetch(`/products/${params.id}`);
@@ -116,6 +117,16 @@ export default function SingleProduct() {
                 >
                   
                   Add to bag
+                </button>
+              </div>
+              <div className='mt-10 '>
+                <button
+                  className='btn btn-secondary btn-md'
+                  onClick={ () => dispatch(clearCart())}
+
+                >
+                  
+                  Clear Bag
                 </button>
               </div>
             </div>
