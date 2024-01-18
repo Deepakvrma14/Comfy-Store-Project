@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 
 export default function CartTotals() {
@@ -17,7 +16,7 @@ export default function CartTotals() {
           </p>
           <p className='flex justify-between text-xs border-b border-base-300 pb-2' >
           <span> Tax  </span>
-          <span className='font-medium' >₹ {tax}</span>
+          <span className='font-medium' >₹ {tax.toFixed(2)}</span>
           </p>
           <p className='mt-4 flex justify-between text-sm pb-2'>
             <span className='font-bold'>Order Total</span>

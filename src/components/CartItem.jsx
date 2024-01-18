@@ -1,4 +1,3 @@
-import React from 'react'
 import { generateAmountOptions } from '../utils'
 import { removeItem, editItem } from '../features/cart/cartSlice'
 import { useDispatch } from 'react-redux'
@@ -7,7 +6,7 @@ export default function CartItem({cartItem}) {
     const dispatch = useDispatch();
     const {cartID, title, price, image, amount, company, productColor} = cartItem;
 
-    const removeItem = () =>{
+    const removeItemFunc = () =>{
         dispatch(removeItem({cartID}));
     }
     const handleAmount = (e) =>{
@@ -29,13 +28,13 @@ export default function CartItem({cartItem}) {
                 <label htmlFor='label' className='label p-0' >
                     <span className='label-text' >Amount:</span>
                      </label>
-                <select name='amount' id='amount' className='mt-2 select select-base select-bordered select-sm' onChange={handleAmount}>
+                <select name='amount' id='amount' className='mt-2 select select-base select-bordered select-sm' onChange={handleAmount} defaultValue={amount} >
                     {generateAmountOptions(amount+5)}
                 </select>
             </div>
-            <button className='mt-2 link link-secondary link-hover text-sm' onClick={removeItem} >Remove</button>
+            <button className='mt-2 link link-secondary link-hover text-sm' onClick={removeItemFunc} >Remove</button>
         </div>
         <p className='font-medium sm:ml-auto' >₹ {price}</p>
     </article>
   );
-};
+}
