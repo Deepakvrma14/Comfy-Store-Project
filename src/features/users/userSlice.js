@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 export const initialState = {
-    users: {username:'Deepak'},
+    user: {username:'Deepak'},
     theme: 'autumn',
 }
 const themes = {
@@ -18,11 +18,14 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        loginUser: (state, action)=>{
-            console.log("login");
-        },
+        loginUser: (state, action) => {
+            console.log(action.payload);
+          },
         logoutUser: (state)=>{
             console.log("logout");
+            state.user = null;
+            localStorage.removeItem(state.users);
+            toast.success("Logged out Successfully");
         },
         toggleTheme: (state)=>{
 

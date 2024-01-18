@@ -1,7 +1,32 @@
 import { FormInput, SubmitBtn } from '../components';
 import { Form, Link } from 'react-router-dom';
 
+import { redirect } from 'react-router-dom';
+import { customFetch } from '../utils';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../features/users/userSlice';
+
+export const action = (store)=> async({request})=>{
+    const formData = await request.formData();
+    const data = Object.fromEntries(formData);
+
+    try{
+      const response = await customFetch.post('/auth/local',data);
+      store.dispatch(loginUser(response.data));
+      toast.success('Logged in Successfully');
+      return redirect('./')
+    }catch(error){
+      console.log(error);
+      const errorMessage = error?.response?.data?.error?.message || "Please add credentials properly";
+      toast.error(errorMessage);
+      return null;
+
+    }
+  }
+
 const Login = () => {
+  
   return (
     <section className='h-screen grid place-items-center'>
       <Form
