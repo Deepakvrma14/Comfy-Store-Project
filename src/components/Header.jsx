@@ -6,10 +6,12 @@ import { clearCart } from '../features/cart/cartSlice';
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userState.user);
+  const navigate = useNavigate();
   const handleLogout = () =>{
-    Navigate('/');
+   
     dispatch(clearCart());
     dispatch(logoutUser());
+    navigate('/');
 
   }
 
