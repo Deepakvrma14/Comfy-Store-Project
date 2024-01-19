@@ -21,7 +21,8 @@ import { loader as landingLoader } from './pages/Landing';
 import {action as registerAction} from './components/Register';
 import {action as loginAction} from './components/Login';
 import { store } from './app/store';
-
+import {loader as checkoutLoader} from './pages/Checkout';
+import {action as checkoutAction} from './components/CheckoutForm'
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,9 @@ const router = createBrowserRouter([
       { path: 'about', element: <About /> },
       {
         path: 'checkout',
+        errorElement:<ErrorElement/>,
+        action: checkoutAction(store),
+        loader:checkoutLoader(store),
         element: <Checkout />,
       },
       {
