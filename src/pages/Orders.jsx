@@ -1,7 +1,7 @@
 import { redirect, useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { customFetch } from '../utils';
-import { OrderList, PaginationContainer, SectionTitle } from '../components';
+import { OrderList, ComplexPaginationContainer, SectionTitle } from '../components';
 
 export const loader =
   (store) =>
@@ -47,7 +47,7 @@ const Orders = () => {
       <SectionTitle text='Your Orders' />
       <OrderList />
       <div className='mt-8 gap-x-3' >
-      <PaginationContainer />
+      <ComplexPaginationContainer />
       </div>
     </>
   );
