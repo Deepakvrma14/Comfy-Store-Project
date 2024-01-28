@@ -1,3 +1,6 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
 import {
   HomeLayout,
   Landing,
@@ -25,6 +28,14 @@ import {loader as checkoutLoader} from './pages/Checkout';
 import {action as checkoutAction} from './components/CheckoutForm'
 import {loader as orderLoader} from './pages/Orders';
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries:{
+      staleTime:1000*60*5,
+
+    },
+  },
+});
 const router = createBrowserRouter([
   {
     path: '/',
@@ -34,19 +45,19 @@ const router = createBrowserRouter([
       {
         index: true,
         errorElement:<ErrorElement/>,
-        loader:landingLoader,
+        loader:landingLoader(queryClient),
         element: <Landing />,
       },
       {
         path: 'products',
         errorElement:<ErrorElement/>,
-        loader:productsLoader,
+        loader:productsLoader(queryClient),
         element: <Products />,
       },
       {
         path: 'products/:id',
         errorElement: <ErrorElement/>,
-        loader: singlePageLoader,
+        loader: singlePageLoader(queryClient),
         element: <SingleProduct />,
       },
       {
@@ -57,13 +68,13 @@ const router = createBrowserRouter([
       {
         path: 'checkout',
         errorElement:<ErrorElement/>,
-        action: checkoutAction(store),
+        action: checkoutAction(store, queryClient),
         loader:checkoutLoader(store),
         element: <Checkout />,
       },
       {
         path: 'orders',
-        loader:orderLoader(store),
+        loader:orderLoader(store, queryClient),
         element: <Orders />,
       },
     ],
@@ -81,8 +92,18 @@ const router = createBrowserRouter([
     errorElement: <Error />,
   },
 ]);
+
+
 const App = () => {
-  return <RouterProvider router={router} />
+  return (
+   <QueryClientProvider client={queryClient} >
+
+<RouterProvider router={router} />
+<ReactQueryDevtools initialIsOpen= {false}/>
+
+   </QueryClientProvider>
+  );
+
 
 };
 export default App;
